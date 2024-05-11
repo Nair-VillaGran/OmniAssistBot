@@ -12,10 +12,3 @@
     <p style="opacity:50%;font-size:10px;">In collaboration with Angel and Nair-VillaGran.</p>
 </footer>
 </div>
-
-<style>
-    img{
-        width:40px;
-        border-radius:100%;
-    }
-</style>
