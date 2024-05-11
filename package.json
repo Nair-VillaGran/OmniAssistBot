@@ -1,7 +1,7 @@
 {
   "name": "omni-asssist-bot",
   "version": "1.0.0",
-  "description": "",
+  "description": "The Perfect Bot - Telegram Bot - OmniAssistBot",
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node dist/bot.js",
