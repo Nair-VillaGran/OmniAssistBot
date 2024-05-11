@@ -9,7 +9,7 @@
     "dev": "npx nodemon src/bot.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Nair-VillaGran + Angel45003",
   "license": "ISC",
   "devDependencies": {
     "@types/express": "^4.17.21",
