@@ -10,7 +10,8 @@ const commandLogger = createLogger(
 export const start = {
   command: commands.ALLOWED_COMMANDOS.START,
   handler: async (ctx: any) => {
-    ctx.reply("¿Qué deseas realizar hoy?"); //, { reply_markup: menu }
+    ctx.reply("¡Hola buenas!, ¿Qué deseas realizar hoy?"); //, { reply_markup: menu }
     commandLogger.info(ctx?.message?.from);
   },
+  // Welcome - Started!
 };
