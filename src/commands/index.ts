@@ -1,8 +1,8 @@
-export const ALLOWED_COMMANDOS = {
-  CONVERTYT: "/convertyt",
-  WELCOME: "/welcome",
-};
+import { reminder } from "./reminder";
+import { start } from "./start";
+import { welcome } from "./welcome";
+import { youtubeConvert } from "./youtube-convert";
 
-export const MENU_COMMANDS = [
-  { command: "start", description: "Iniciar el bot" },
-];
+const commands = [reminder, welcome, youtubeConvert, start];
+
+export default commands;

@@ -2,20 +2,24 @@ require("dotenv").config();
 
 import express from "express";
 import createLogger from "./utils/logger";
+import commands from "./commands/index";
+import constants from "./constants/index";
 import { Bot } from "grammy";
-import { MENU_COMMANDS } from "./commands";
-import { LOGGER_NAMES } from "./constants/logger-names";
+// import { Menu } from "@grammyjs/menu";
 
-const commandLogger = createLogger(LOGGER_NAMES.CORE);
+const { commands: commandConstants, loggerNames } = constants;
+
+const commandLogger = createLogger(loggerNames.LOGGER_NAMES.CORE);
 async function bootstrap() {
+  const PORT = process.env.PORT || 3000;
   const bot = new Bot(process.env.BOT_TOKEN || "");
   const app = express();
 
-  bot.command("start", (ctx) => ctx.reply("Bienvenido a OmniAssist"));
+  commands.forEach(({ command, handler }) => {
+    bot.command(command, handler);
+  });
 
-  await bot.api.setMyCommands(MENU_COMMANDS);
-
-  const PORT = process.env.PORT || 3000;
+  await bot.api.setMyCommands(commandConstants.MENU_COMMANDS);
 
   app.listen(PORT, () => {
     commandLogger.info(`Server running on port ${PORT}`);
