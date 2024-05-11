@@ -1,31 +1,27 @@
+require("dotenv").config();
+
 import express from "express";
+import createLogger from "./utils/logger";
 import { Bot } from "grammy";
-import { ALLOWED_COMMANDOS } from "./commands";
-import { welcome } from "./functions/welcome";
-import { youtubeConvert } from "./functions/youtube-convert";
+import { MENU_COMMANDS } from "./commands";
+import { LOGGER_NAMES } from "./constants/logger-names";
 
-const bot = new Bot("");
+const commandLogger = createLogger(LOGGER_NAMES.CORE);
+async function bootstrap() {
+  const bot = new Bot(process.env.BOT_TOKEN || "");
+  const app = express();
 
-const app = express();
+  bot.command("start", (ctx) => ctx.reply("Bienvenido a OmniAssist"));
 
-bot.command("start", (ctx) => ctx.reply("Bienvenido a OmniAssist"));
+  await bot.api.setMyCommands(MENU_COMMANDS);
 
-bot.on("message", (ctx) => {
-  const { text } = ctx.message;
+  const PORT = process.env.PORT || 3000;
 
-  if (text === ALLOWED_COMMANDOS.WELCOME) {
-    welcome(ctx);
-  }
+  app.listen(PORT, () => {
+    commandLogger.info(`Server running on port ${PORT}`);
+  });
 
-  if (text === ALLOWED_COMMANDOS.CONVERTYT) {
-    youtubeConvert(ctx);
-  }
-});
+  await bot.start();
+}
 
-bot.start();
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+bootstrap().catch((err) => commandLogger.error(err));
