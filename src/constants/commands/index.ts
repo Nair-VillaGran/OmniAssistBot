@@ -9,3 +9,6 @@ export const ALLOWED_COMMANDOS = {
 export const MENU_COMMANDS = [
   { command: "start", description: "Iniciar el bot" },
 ];
+
+
+//COMMANDS BOT..
